@@ -7,7 +7,10 @@ import pylibjpeg
 
 
 def read_img():    
-    path = '.\\All_Images'
+    # path = '.\\All_Images'
+    # path = '.\\All1'
+    # path = '.\\All2'
+    path = '.\\All3'
     folder_img = 'Images'
     folder_unShape = 'unShape'
     names, img_path = [], []
