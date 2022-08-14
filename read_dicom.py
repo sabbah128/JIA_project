@@ -3,17 +3,18 @@ import pydicom
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from PIL import Image
+import pylibjpeg
 
 
 def read_img():    
-    path = '.\\All_Images'
+    path = '.\\KianAra'
     folder_img = 'Images'
     folder_unShape = 'unShape'
     names, img_path = [], []
 
     for (root, dirs, file) in os.walk(path):
         for f in file:
-            if '.IMA' in f:
+            if '.dcm' in f:
                 names.append(f.split('.')[0])
                 img_path.append(root+"\\"+f)
 
@@ -23,11 +24,11 @@ def read_img():
     else:
         os.mkdir(folder_img)
         os.mkdir(folder_unShape)
-
     for i in range(len(img_path)):
         img = pydicom.dcmread(img_path[i])
         img = img.pixel_array
         img_shape = img.shape
+        print(img_shape)
 
         if img_shape == (2, 128, 128) or img_shape == (2, 256, 256):         
             plt.imsave(folder_img+'\\'+ names[i] + '.' + str(i) + '.ant.jpg', img[0], cmap=cm.gray)
