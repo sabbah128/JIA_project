@@ -7,10 +7,10 @@ import pylibjpeg
 
 
 def read_img():    
-    # path = '.\\All_Images'
+    path = '.\\All_Images'
     # path = '.\\All1'
     # path = '.\\All2'
-    path = '.\\All3'
+    # path = '.\\All3'
     folder_img = 'Images'
     folder_unShape = 'unShape'
     names, img_path = [], []
@@ -18,7 +18,7 @@ def read_img():
     for (root, dirs, file) in os.walk(path):
         for f in file:
             if '.dcm' in f:
-                names.append(f.split('.')[0])
+                names.append((root.split('_')[0]).split('\\')[-1])
                 img_path.append(root+"\\"+f)
 
     if os.path.isdir(folder_img):
@@ -27,11 +27,11 @@ def read_img():
     else:
         os.mkdir(folder_img)
         os.mkdir(folder_unShape)
+
     for i in range(len(img_path)):
         img = pydicom.dcmread(img_path[i])
         img = img.pixel_array
         img_shape = img.shape
-        print(img_shape)
 
         if img_shape == (2, 128, 128) or img_shape == (2, 256, 256):         
             plt.imsave(folder_img+'\\'+ names[i] + '.' + str(i) + '.ant.jpg', img[0], cmap=cm.gray)
