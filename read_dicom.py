@@ -7,7 +7,7 @@ import pylibjpeg
 
 
 def read_img():    
-    path = '.\\KianAra'
+    path = '.\\All_Images'
     folder_img = 'Images'
     folder_unShape = 'unShape'
     names, img_path = [], []
